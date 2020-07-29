@@ -1,0 +1,8 @@
+.radio-volum__block {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+.radio-volum__percent {
+    margin: 0 10px;
+}

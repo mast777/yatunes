@@ -5,10 +5,17 @@ export const radioPlayerInit = () => {
     const radioHeaderBig = document.querySelector(".radio-header__big");
     const radioItem = document.querySelectorAll(".radio-item");
     const radioStop = document.querySelector(".radio-stop");
+    const radioVolum = document.querySelectorAll(".radio-volum");
+    const radioVolumPercent = document.querySelector(".radio-volum__percent");
+
+    const radioVolumPercentRender = (n) => {
+        radioVolumPercent.textContent = (n*100)+'%';
+    }
 
     const audio = new Audio();
     audio.type = "audio/aac";
     audio.volume = 0.2;
+    radioVolumPercentRender(audio.volume);
 
     radioStop.disabled = true;
 
@@ -55,6 +62,21 @@ export const radioPlayerInit = () => {
             audio.pause();
         }
         changeIconPlay();
+    });
+
+    radioVolum.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if(event.target.classList.contains('fa-plus')) {
+                if(audio.volume < 1) {
+                    audio.volume = (audio.volume + 0.1).toFixed(1);
+                }
+            } else {
+                if(audio.volume > 0) {
+                    audio.volume = (audio.volume - 0.1).toFixed(1);
+                }
+            }
+            radioVolumPercentRender(audio.volume);
+        });
     });
 
 }
